@@ -1,7 +1,7 @@
 #' Scaffold R wrappers for Python functions
 #'
 #' @param python_function Fully qualified name of Python function or class
-#'   constructor (e.g. `tf$layers$average_pooling1d`)
+#'   constructor (e.g. `tf$nn$top_k`)
 #' @param r_prefix Prefix to add to generated R function name
 #' @param r_function Name of R function to generate (defaults to name of Python
 #'   function if not specified)
@@ -12,10 +12,10 @@
 #'   really intended as an starting point for an R wrapper rather than a wrapper
 #'   that can be used without modification.
 #'
-#' @keywords internal
+#' @importFrom reticulate py_function_docs
 #'
 #' @export
-py_function_wrapper <- function(python_function, r_prefix = NULL, r_function = NULL) {
+scaffold_py_function_wrapper <- function(python_function, r_prefix = NULL, r_function = NULL) {
 
   # get the docs
   docs <- py_function_docs(python_function)
@@ -89,45 +89,10 @@ py_function_wrapper <- function(python_function, r_prefix = NULL, r_function = N
   wrapper
 }
 
-#' @rdname py_function_wrapper
-#' @export
-py_function_docs <- function(python_function) {
-
-  # eval so that python loads
-  eval(parse(text = python_function))
-
-  # get components
-  components <- strsplit(python_function, "\\$")[[1]]
-  topic <- components[[length(components)]]
-  source <- paste(components[1:(length(components)-1)], collapse = "$")
-
-  # get function docs
-  function_docs <- help_handler(type = "completion", topic, source)
-
-  # get parameter docs
-  parameter_docs <- help_handler(type = "parameter", NULL, python_function)
-
-  # create a named list with parameters
-  parameters <- parameter_docs$arg_descriptions
-  names(parameters) <- parameter_docs$args
-
-  # create a new list with all doc info
-  list(name = function_docs$title,
-       qualified_name = python_function,
-       description = function_docs$description,
-       details = function_docs$details,
-       signature = function_docs$signature,
-       parameters = parameters,
-       sections = function_docs$sections,
-       returns = function_docs$returns)
-}
-
-
 #' @export
 print.py_wrapper <- function(x, ...) {
   cat(x, sep = "\n")
 }
-
 
 #' Custom Scaffolding of R Wrappers for Python Functions
 #'
@@ -139,7 +104,7 @@ print.py_wrapper <- function(x, ...) {
 #' `python_function_result` that can also be processed by `postprocess_fn`
 #' before writing the closing curly braces for the generated wrapper function.
 #'
-#' @inheritParams py_function_wrapper
+#' @inheritParams scaffold_py_function_wrapper
 #' @param additional_roxygen_fields A list of additional roxygen fields to write
 #'   to the roxygen docs, e.g. `list(export = "", rdname =
 #'   "generated-wrappers")`.
@@ -154,6 +119,8 @@ print.py_wrapper <- function(x, ...) {
 #'   function.
 #' @param file_name The file name to write the generated wrapper function to. If
 #'   `NULL`, the generated wrapper will only be printed out in the console.
+#'
+#' @importFrom reticulate py_function_docs
 #'
 #' @examples
 #' \dontrun{
@@ -186,7 +153,7 @@ print.py_wrapper <- function(x, ...) {
 #'   postprocess_fn = function() { "print(python_function_result)" })
 #'
 #' }
-py_function_custom_scaffold <- function(
+custom_scaffold_py_function_wrapper <- function(
   python_function,
   r_function = NULL,
   additional_roxygen_fields = NULL,
@@ -212,8 +179,9 @@ py_function_custom_scaffold <- function(
 
       # Write docstrings for each parameters
       for(i in 1:length(docs$parameters)) {
-        param_doc <- process_param_doc_fn(docs$sections[i], docs)
-        write_line(paste0("#' @param ", " ", names(docs$parameters)[i], " ", param_doc))
+        param_name <- names(docs$parameters)[i]
+        param_doc <- process_param_doc_fn(docs$parameters[[param_name]], docs)
+        write_line(paste0("#' @param ", " ", param_name, " ", param_doc))
       }
 
       # Write additional roxygen fields

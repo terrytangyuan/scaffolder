@@ -13,4 +13,67 @@ vignette: >
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-TBA
+## Scaffold R wrappers to Python function
+
+```
+library(tensorflow)
+scaffold_py_function_wrapper("tf$nn$top_k")
+```
+generates the following wrapper to the Python function named `tf.nn.top_k()`
+
+```
+#' Finds values and indices of the `k` largest entries for the last dimension.
+#' 
+#' If the input is a vector (rank=1), finds the `k` largest entries in the vector
+#' and outputs their values and indices as vectors. Thus `values[j]` is the
+#' `j`-th largest entry in `input`, and its index is `indices[j]`. For matrices (resp. higher rank input), computes the top `k` entries in each
+#' row (resp. vector along the last dimension). Thus, values.shape = indices.shape = input.shape[:-1] + [k] If two elements are equal, the lower-index element appears first.
+#' 
+#' @param input 1-D or higher `Tensor` with last dimension at least `k`.
+#' @param k 0-D `int32` `Tensor`. Number of top elements to look for along the last dimension (along each row for matrices).
+#' @param sorted If true the resulting `k` elements will be sorted by the values in descending order.
+#' @param name Optional name for the operation.
+#' 
+#' @return values: The `k` largest elements along each last dimensional slice. indices: The indices of `values` within the last dimension of `input`.
+#' 
+#' @export
+top_k <- function(input, k = 1L, sorted = TRUE, name = NULL) {
+  tf$nn$top_k(
+    input = input,
+    k = k,
+    sorted = sorted,
+    name = name
+  )
+}
+```
+
+## Customized Scaffolding
+
+```
+library(tensorflow)
+library(stringr)
+
+# Example of a `process_param_fn` to cast parameters with default values
+# that contains "L" to integers
+process_int_param_fn <- function(param, docs) {
+  # Extract the list of parameters that have integer values as default
+  int_params <- gsub(
+    " = [-]?[0-9]+L",
+    "",
+    str_extract_all(docs$signature, "[A-z]+ = [-]?[0-9]+L")[[1]])
+  # Explicitly cast parameter in the list obtained above to integer
+  if (param %in% int_params) {
+    param <- paste0("as.integer(", param, ")")
+  }
+  param
+}
+
+# Note that since the default value of parameter `k` is `1L`. It is wrapped
+# by `as.integer()` to ensure it's casted to integer before sending it to `tf$nn$top_k`
+# for execution. We then print out the python function result.
+custom_scaffold_py_function_wrapper(
+  "tf$nn$top_k",
+  r_function = "top_k",
+  process_param_fn = process_int_param_fn,
+  postprocess_fn = function() { "return python_function_result" })
+```

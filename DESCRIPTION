@@ -11,7 +11,8 @@ Authors@R: c(
          email = "kevin@rstudio.com"),
   person("RStudio", role = c("cph"))
   )
-Description: Scaffolding Interfaces to modules, classes, functions, and documentations
+Description: This package provides a comprehensive set of tools to scaffold
+  interfaces to modules, classes, functions, and documentations
   written in other programming languages.
 License: Apache License 2.0
 URL: https://github.com/terrytangyuan/scaffolder

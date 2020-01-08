@@ -6,7 +6,7 @@ Status](https://travis-ci.org/terrytangyuan/scaffolder.svg?branch=master)](https
 
 The **scaffolder** package provides a comprehensive set of tools to scaffolding interfaces to modules, classes, functions, and documentations written in other programming languages. As initial proof of concept, scaffolding R interfaces to Python packages is supported via [reticulate](https://github.com/rstudio/reticulate).
 
-For more background and motivation behind this package, please checkout [here](https://github.com/terrytangyuan/scaffolder).
+For more background and motivation behind this package, please checkout [here](https://terrytangyuan.github.io/scaffolder/articles/intro.html).
 
 ### Getting started
 
@@ -21,4 +21,4 @@ remotes::install_github("terrytangyuan/scaffolder")
 
 #### Examples
 
-Please checkout the examples [here](https://github.com/terrytangyuan/scaffolder).
+Please checkout the examples [here](https://terrytangyuan.github.io/scaffolder/articles/intro.html).

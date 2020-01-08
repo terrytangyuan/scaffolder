@@ -23,7 +23,6 @@ navbar:
      href: https://github.com/terrytangyuan/scaffolder
 
 reference:
-
   - title: "Scaffolding Python Function Wrappers"
     contents:
       - scaffold_py_function_wrapper

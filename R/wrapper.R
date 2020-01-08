@@ -21,7 +21,7 @@ scaffold_py_function_wrapper <- function(python_function, r_prefix = NULL, r_fun
   docs <- py_function_docs(python_function)
 
   # generate wrapper w/ roxygen
-  con <- textConnection("wrapper", "w")
+  con <- textConnection("scaffolded_wrapper", "w")
 
   # title/description
   write(sprintf("#' %s\n#' ", docs$description), file = con)
@@ -85,12 +85,12 @@ scaffold_py_function_wrapper <- function(python_function, r_prefix = NULL, r_fun
   close(con)
 
   # return the wrapper with a special class so we can write a print method
-  class(wrapper) <- c("py_wrapper", "character")
-  wrapper
+  class(scaffolded_wrapper) <- c("scaffolded_py_wrapper", "character")
+  scaffolded_wrapper
 }
 
 #' @export
-print.py_wrapper <- function(x, ...) {
+print.scaffolded_py_wrapper <- function(x, ...) {
   cat(x, sep = "\n")
 }
 
@@ -226,7 +226,7 @@ custom_scaffold_py_function_wrapper <- function(
       # Inject additional custom code
       write_line(paste0("  ", postprocess_fn()))
 
-      write_line("}\n")
+      write_line("}")
     }
   )
 

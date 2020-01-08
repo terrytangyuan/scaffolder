@@ -1,9 +1,9 @@
 ---
-title: "Basics of scaffolder Package"
+title: "Introduction to scaffolder"
 output: 
   rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Basics of scaffolder Package}
+  %\VignetteIndexEntry{Introduction to scaffolder}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,6 +16,7 @@ knitr::opts_chunk$set(eval = FALSE)
 ## Scaffold R wrappers to Python function
 
 ```
+library(scaffolder)
 library(tensorflow)
 scaffold_py_function_wrapper("tf$nn$top_k")
 ```
@@ -50,8 +51,9 @@ top_k <- function(input, k = 1L, sorted = TRUE, name = NULL) {
 ## Customized Scaffolding
 
 ```
-library(tensorflow)
+library(scaffolder)
 library(stringr)
+library(tensorflow)
 
 # Example of a `process_param_fn` to cast parameters with default values
 # that contains "L" to integers
@@ -77,3 +79,4 @@ custom_scaffold_py_function_wrapper(
   process_param_fn = process_int_param_fn,
   postprocess_fn = function() { "return python_function_result" })
 ```
+

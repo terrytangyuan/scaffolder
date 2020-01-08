@@ -236,4 +236,3 @@ custom_scaffold_py_function_wrapper <- function(
     write(wrapper_output, file = file_name, append = TRUE)
   }
 }
-

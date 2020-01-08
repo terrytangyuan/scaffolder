@@ -3,11 +3,11 @@ Type: Package
 Title: Scaffolding Interfaces to Packages in Other Programming Languages
 Version: 0.0.1
 Authors@R: c(
-  person("Yuan", "Tang", role = c("aut", "cph"),
+  person("Yuan", "Tang", role = c("aut", "cre", "cph"),
          email = "terrytangyuan@gmail.com",
          comment = c(ORCID = "0000-0001-5243-233X")),
   person("JJ", "Allaire", role = c("aut"), email = "jj@rstudio.com"),
-  person("Kevin", "Ushey", role = c("aut", "cre"),
+  person("Kevin", "Ushey", role = c("aut"),
          email = "kevin@rstudio.com"),
   person("RStudio", role = c("cph"))
   )

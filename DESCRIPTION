@@ -9,8 +9,9 @@ Authors@R: c(
   person("JJ", "Allaire", role = c("aut"), email = "jj@rstudio.com"),
   person("Kevin", "Ushey", role = c("aut"),
          email = "kevin@rstudio.com"),
-  person("RStudio", role = c("cph"))
-  )
+  person("RStudio", role = c("cph")),
+  person("Navdeep", "Gill", role = c("ctb"), email = "navdeep@h2o.ai"),
+  person("Erin", "LeDell", role = c("ctb"), email = "erin@h2o.ai"))
 Description: This package provides a comprehensive set of tools to scaffold
   interfaces to modules, classes, functions, and documentations
   written in other programming languages.

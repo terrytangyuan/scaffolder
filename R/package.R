@@ -21,9 +21,10 @@ NULL
 }
 
 python_not_available_message <- function() {
-  packageStartupMessage(
-    paste0("Python is not available. ",
-           "Please install it and try load it again."))
+  # TODO: Debug why this is not detecting Python successfully
+  # packageStartupMessage(
+  #   paste0("Python may not be available. ",
+  #          "Please install it and try load it again."))
 }
 
 on_cran <- function() {

@@ -14,6 +14,8 @@ test_succeeds("scaffold_py_function_wrapper() works correctly", {
 })
 
 test_succeeds("custom_scaffold_py_function_wrapper() works correctly", {
+  skip_if_not_installed("stringr")
+  library(stringr)
   process_int_param_fn <- function(param, docs) {
     # Extract the list of parameters that have integer values as default
     int_params <- gsub(

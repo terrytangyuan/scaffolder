@@ -6,6 +6,7 @@ skip_if_no_tensorflow <- function() {
     reticulate::use_python("/usr/bin/python3")
   if (!reticulate::py_module_available("tensorflow"))
     skip("tensorflow Python module is not available for testing")
+  library(tensorflow)
 }
 
 test_succeeds <- function(desc, expr) {

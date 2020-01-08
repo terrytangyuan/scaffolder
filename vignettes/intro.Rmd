@@ -13,14 +13,24 @@ vignette: >
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
+## Why do we need this package?
+
+
+
 ## Scaffold R wrappers to Python function
+
+The following example requires the installation of TensorFlow. Please check out the instruction [here](https://tensorflow.rstudio.com/installation/).
+
+Once it's installed, we can then execute `scaffold_py_function_wrapper()` to generate the R wrapper to `tensorflow.nn.top_k()` function:
 
 ```
 library(scaffolder)
 library(tensorflow)
+
 scaffold_py_function_wrapper("tf$nn$top_k")
 ```
-generates the following wrapper to the Python function named `tf.nn.top_k()`
+
+This will generate the following R wrapper that could serve as a good starting point when building R interfaces to Python modules including all the function parameters, default values, and the associated doc-strings for each parameters.
 
 ```
 #' Finds values and indices of the `k` largest entries for the last dimension.
@@ -48,15 +58,15 @@ top_k <- function(input, k = 1L, sorted = TRUE, name = NULL) {
 }
 ```
 
+Note that the generated wrapper will often require additional editing (e.g. to convert Python list literals in the docs to R lists, to massage R numeric values to Python integers via `as.integer` where required, etc.) so is really intended as an starting point for an R wrapper rather than a wrapper that can be used without modification.
+
 ## Customized Scaffolding
 
-```
-library(scaffolder)
-library(stringr)
-library(tensorflow)
+We can customize the scaffolding process in order to avoid the additional editing that we mentioned above. For example, we can implement a function to cast parameters with default values that contains "L" to integers. This is often useful when the package maintainer wants to automate the generation of the R wrapper and reduce the maintenance efforts required in the future, e.g. make sure doc-strings and default values for all the parameters are up-to-date.
 
-# Example of a `process_param_fn` to cast parameters with default values
-# that contains "L" to integers
+```
+library(stringr)
+
 process_int_param_fn <- function(param, docs) {
   # Extract the list of parameters that have integer values as default
   int_params <- gsub(
@@ -69,13 +79,47 @@ process_int_param_fn <- function(param, docs) {
   }
   param
 }
+```
 
-# Note that since the default value of parameter `k` is `1L`. It is wrapped
-# by `as.integer()` to ensure it's casted to integer before sending it to `tf$nn$top_k`
-# for execution. We then print out the python function result.
+Note that since the default value of parameter `k` is `1L`. It is wrapped
+by `as.integer()` to ensure it's casted to integer before sending it to `tf$nn$top_k` for execution. We then print out the python function result.
+
+```
+library(scaffolder)
+library(tensorflow)
+
 custom_scaffold_py_function_wrapper(
   "tf$nn$top_k",
   r_function = "top_k",
   process_param_fn = process_int_param_fn,
   postprocess_fn = function() { "return(python_function_result)" })
 ```
+
+This will generate the following R code:
+
+```
+#' @description Finds values and indices of the `k` largest entries for the last dimension.
+#' @title top_k
+#' 
+#' @param  input 1-D or higher `Tensor` with last dimension at least `k`.
+#' @param  k 0-D `int32` `Tensor`. Number of top elements to look for along the last dimension (along each row for matrices).
+#' @param  sorted If true the resulting `k` elements will be sorted by the values in descending order.
+#' @param  name Optional name for the operation.
+top_k <- function(input, k = 1L, sorted = TRUE, name = NULL) {
+
+  python_function_result <- tf$nn$top_k(
+    input = input,
+    k = as.integer(k),
+    sorted = sorted,
+    name = name
+  )
+  return(python_function_result)
+}
+```
+
+This is the same R code as what we generated previously but with two differences:
+
+* The parameter `k` is casted to integer automatically.
+* The final result `python_function_result` from executing the underlying Python function is being returned as a result of this generated wrapper.
+
+There are also several other different parts where users can customize the scaffolding of the R wrapper functions. Please check out the documentation via `?custom_scaffold_py_function_wrapper` for more details.

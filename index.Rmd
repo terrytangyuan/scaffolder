@@ -1,3 +1,12 @@
+---
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 # scaffolder
 
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/scaffolder)](https://cran.r-project.org/package=scaffolder)

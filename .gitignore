@@ -11,5 +11,4 @@ src/*.dll
 revdep/
 issues/
 README.html
-index.html
 inst/doc

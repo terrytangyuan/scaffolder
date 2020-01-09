@@ -91,28 +91,7 @@
 
     
     
-<div id="what-is-this-package" class="section level1">
-<h1 class="hasAnchor">
-<a href="#what-is-this-package" class="anchor"></a>What is this package?</h1>
 <p>The <strong>scaffolder</strong> package provides a comprehensive set of tools to automate the process of scaffolding interfaces to modules, classes, functions, and documentations written in other programming languages.</p>
-<p>As initial proof of concept, scaffolding R interfaces to Python packages is supported via <a href="https://github.com/rstudio/reticulate">reticulate</a>.</p>
-</div>
-<div id="why-do-we-need-this-package" class="section level1">
-<h1 class="hasAnchor">
-<a href="#why-do-we-need-this-package" class="anchor"></a>Why do we need this package?</h1>
-<p>Let’s say if we want to write an interface to an existing Python package. <strong>reticulate</strong> package is the perfect tool to facilitate that. <strong>reticulate</strong> package contains a powerful set of tools for interoperability between Python and R. It allows R users to call Python from R in many different ways and automatically translate between different R and Python objects.</p>
-<p>However, if we use <strong>reticulate</strong> often enough, we will face many challenges, for example:</p>
-<ul>
-<li>We need to copy-paste doc-strings from Python API and then edit it in order to provide API references for the R wrapper functions. This requires a lot of editing and endless maintenance efforts in the future to keep the consistency between the API references in both Python and R.</li>
-<li>We need to copy-paste the default values for all the parameters and translate Python objects to R objects when writing the R wrapper functions (e.g. <code>None</code> -&gt; <code>NULL</code>, <code>True</code> -&gt; <code>TRUE</code>, convert Python list literals in the docs to R lists, massage R numeric values to Python integers via <code>as.integer</code> where required, etc.). And then again, this requires future maintenance in order to keep them up-to-date.</li>
-</ul>
-<p>The <strong>scaffolder</strong> package comes to the rescue. It provides functions to automatically scaffold and customize the R wrapper interfaces to modules, classes, functions, and documentations written in other programming languages. Users are able to customize different parts of the scaffolding process in order to avoid the additional editing that we mentioned above. For example, users can implement a function to cast parameters with default values that contains “L” to integers.</p>
-</div>
-<div id="history" class="section level1">
-<h1 class="hasAnchor">
-<a href="#history" class="anchor"></a>History</h1>
-<p>The core functionalties of this package were originally developed by <a href="https://github.com/jjallaire">J.J. Allaire</a> and <a href="https://github.com/terrytangyuan">Yuan Tang</a> as part of <strong>reticulate</strong>’s <a href="https://github.com/rstudio/reticulate/blob/a046bd12eecc7c879ff14637367d661c707b5d8d/R/wrapper.R">scaffolding functionalities</a> to facilitate the process of writing different components of <a href="https://tensorflow.rstudio.com/">the R interface to TensorFlow</a>. We found the process of writing R wrappers very tedious and then developed the scaffolding functionalities in <strong>reticulate</strong> that are marked for internal use only. It was then further developed and experimented to automate the generation of <a href="https://github.com/h2oai/h2o4gpu/tree/2af2bc75cef4ad93a28b80c1359c2cefe758a643">h2oai/h2o4gpu’s R package</a>.</p>
-</div>
 <div id="examples" class="section level1">
 <h1 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h1>
@@ -212,10 +191,7 @@ top_k &lt;- function(input, k = 1L, sorted = TRUE, name = NULL) {
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#what-is-this-package">What is this package?</a></li>
-      <li><a href="#why-do-we-need-this-package">Why do we need this package?</a></li>
-      <li><a href="#history">History</a></li>
-      <li>
+<li>
 <a href="#examples">Examples</a>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#scaffold-r-wrappers-to-python-function">Scaffold R wrappers to Python function</a></li>

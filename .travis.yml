@@ -13,6 +13,7 @@ matrix:
         - TENSORFLOW_VERSION="2.0.0"
       r_github_packages:
         - rstudio/reticulate
+        - rstudio/tensorflow
 
 addons:
   apt:

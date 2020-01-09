@@ -24,11 +24,13 @@ LazyData: true
 Depends:
     R (>= 3.0)
 Imports:
-    reticulate
+    reticulate,
+    utils
 Suggests:
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    stringr
 RoxygenNote: 7.0.2
 Roxygen: list(markdown = TRUE)
 VignetteBuilder: knitr

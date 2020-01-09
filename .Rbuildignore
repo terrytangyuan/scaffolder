@@ -16,3 +16,4 @@ LICENSE
 .travis.yml
 ^_pkgdown\.yml$
 ^appveyor\.yml$
+.github

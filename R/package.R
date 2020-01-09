@@ -9,6 +9,7 @@
 NULL
 
 #' @importFrom reticulate py_available import
+#' @importFrom utils capture.output
 NULL
 
 .onLoad <- function(libname, pkgname) {

@@ -1,0 +1,29 @@
+language: R
+warnings_are_errors: false
+
+cache:
+  packages: true
+  directories:
+    - $HOME/.cache/pip
+
+matrix:
+  include:
+    - name: "TensorFlow (2.0.0)"
+      env:
+        - TENSORFLOW_VERSION="2.0.0"
+      r_github_packages:
+        - rstudio/reticulate
+
+addons:
+  apt:
+    packages:
+      python3-dev
+      python3-pip
+      python3-virtualenv
+      python3-venv
+
+before_script:
+  - python3 -m pip install --upgrade --ignore-installed --user travis virtualenv
+  - R CMD INSTALL .
+  - R -e 'tensorflow::install_tensorflow(version = Sys.getenv("TENSORFLOW_VERSION"), extra_packages="IPython")'
+  - R -e 'tensorflow::tf_config()'

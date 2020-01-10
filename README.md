@@ -1,6 +1,6 @@
 # scaffolder
 
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/scaffolder)](https://cran.r-project.org/package=scaffolder)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis-CI Build
 Status](https://travis-ci.org/terrytangyuan/scaffolder.svg?branch=master)](https://travis-ci.org/terrytangyuan/scaffolder)
 

@@ -1,1 +1,3 @@
-## scaffolder 0.0.1 (UNDER DEVELOPMENT)
+## scaffolder 0.0.0.9000
+
+* First release with experimental functionalities of scaffolding Python functions.

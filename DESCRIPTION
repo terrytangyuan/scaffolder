@@ -12,9 +12,9 @@ Authors@R: c(
   person("RStudio", role = c("cph")),
   person("Navdeep", "Gill", role = c("ctb"), email = "navdeep@h2o.ai"),
   person("Erin", "LeDell", role = c("ctb"), email = "erin@h2o.ai"))
-Description: This package provides a comprehensive set of tools to scaffold
+Description: Comprehensive set of tools for scaffolding R
   interfaces to modules, classes, functions, and documentations
-  written in other programming languages.
+  written in other programming languages, such as 'Python'.
 License: Apache License 2.0
 URL: https://github.com/terrytangyuan/scaffolder
 BugReports: https://github.com/terrytangyuan/scaffolder/issues

@@ -6,18 +6,19 @@
 \usage{
 scaffold_py_function_wrapper(
   python_function,
-  r_prefix = NULL,
-  r_function = NULL
+  r_function = NULL,
+  file_name = NULL
 )
 }
 \arguments{
 \item{python_function}{Fully qualified name of Python function or class
 constructor (e.g. \code{tf$nn$top_k})}
 
-\item{r_prefix}{Prefix to add to generated R function name}
-
 \item{r_function}{Name of R function to generate (defaults to name of Python
 function if not specified)}
+
+\item{file_name}{The file name to write the generated wrapper function to. If
+\code{NULL}, the generated wrapper will only be printed out in the console.}
 }
 \description{
 Scaffold R wrappers for Python functions

@@ -2,9 +2,10 @@
 #'
 #' @param python_function Fully qualified name of Python function or class
 #'   constructor (e.g. `tf$nn$top_k`)
-#' @param r_prefix Prefix to add to generated R function name
 #' @param r_function Name of R function to generate (defaults to name of Python
 #'   function if not specified)
+#' @param file_name The file name to write the generated wrapper function to. If
+#'   `NULL`, the generated wrapper will only be printed out in the console.
 #'
 #' @note The generated wrapper will often require additional editing (e.g. to
 #'   convert Python list literals in the docs to R lists, to massage R numeric
@@ -15,84 +16,18 @@
 #' @importFrom reticulate py_function_docs
 #'
 #' @export
-scaffold_py_function_wrapper <- function(python_function, r_prefix = NULL, r_function = NULL) {
+scaffold_py_function_wrapper <- function(python_function, r_function = NULL, file_name = NULL) {
 
-  # get the docs
-  docs <- py_function_docs(python_function)
-
-  # generate wrapper w/ roxygen
-  con <- textConnection("scaffolded_wrapper", "w")
-
-  # title/description
-  write(sprintf("#' @title %s\n#' ", docs$title), file = con)
-  write(sprintf("#' @description %s\n#' ", docs$description), file = con)
-  details <- gsub("\n", "\n#' ", docs$details, fixed = TRUE)
-  write(sprintf("#' @details %s\n#' ", details), file = con)
-
-  # parameters
-  for (param in names(docs$parameters)) {
-    # Note: the gsub is needed to prefix necessary indentations
-    # to bullet points in parameter description
-    param_description <- gsub("\n", "\n#'  ", docs$parameters[[param]], fixed = TRUE)
-    write(sprintf("#' @param %s %s", param, param_description), file = con)
-  }
-
-  # returns
-  if (isTRUE(nzchar(docs$returns))) {
-    write("#' ", file = con)
-    write(sprintf("#' @return %s", gsub("^\n", "", docs$returns)), file = con)
-  }
-
-  # sections
-  for (section in names(docs$sections)) {
-    section_text <- docs$sections[[section]]
-    section_text <- gsub("\n", "\n#' ", section_text, fixed = TRUE)
-    write("#' ", file = con)
-    write(sprintf("#' @section %s:\n#' %s", section, section_text), file = con)
-  }
-
-  # export
-  write("#' ", file = con)
-  write("#' @export", file = con)
-
-  # signature
-  if (is.null(r_function)) {
-    r_function <- docs$name
-    if (!is.null(r_prefix))
-      r_function <- paste(r_prefix, r_function, sep = "_")
-  }
-  signature <- sub(paste0(docs$name, "\\("), paste(r_function, "<- function("), docs$signature)
-  write(paste(signature, "{"), file = con)
-
-  # delegation
-  write(paste0("  ", python_function, "("), file = con)
-  params <- names(docs$parameters)
-  if (length(params) > 0) {
-    for (i in 1:length(params)) {
-      suffix <- if (i < length(params))
-        ","
-      else
-        "\n  )"
-      write(paste0("    ", params[[i]], " = ", params[[i]], suffix), file = con)
-    }
-  } else {
-    write(")", file = con)
-  }
-
-  # end function
-  write("}", file = con)
-
-  # close the connection
-  close(con)
-
-  # return the wrapper with a special class so we can write a print method
-  class(scaffolded_wrapper) <- c("scaffolded_py_wrapper", "character")
-  scaffolded_wrapper
-}
-
-#' @export
-print.scaffolded_py_wrapper <- function(x, ...) {
-  cat(x, sep = "\n")
+  custom_scaffold_py_function_wrapper(
+    python_function,
+    r_function = NULL,
+    additional_roxygen_fields = NULL,
+    process_docs_fn = function(docs) docs,
+    process_param_fn = function(param, docs) param,
+    process_param_doc_fn = function(param_doc, docs) param_doc,
+    postprocess_fn = NULL,
+    file_name = file_name
+  )
 }
 
 #' Custom Scaffolding of R Wrappers for Python Functions
@@ -161,7 +96,7 @@ custom_scaffold_py_function_wrapper <- function(
   process_docs_fn = function(docs) docs,
   process_param_fn = function(param, docs) param,
   process_param_doc_fn = function(param_doc, docs) param_doc,
-  postprocess_fn = function() {},
+  postprocess_fn = NULL,
   file_name = NULL
 ) {
 
@@ -243,7 +178,10 @@ custom_scaffold_py_function_wrapper <- function(
       }
 
       # Inject additional custom code
-      write_line(paste0("  ", postprocess_fn()))
+      if (is.null(postprocess_fn))
+        write_line("")
+      else
+        write_line(paste0("  ", postprocess_fn()))
 
       write_line("}")
     }

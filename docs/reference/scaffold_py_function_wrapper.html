@@ -131,8 +131,8 @@
 
     <pre class="usage"><span class='fu'>scaffold_py_function_wrapper</span>(
   <span class='no'>python_function</span>,
-  <span class='kw'>r_prefix</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>r_function</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>r_function</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -144,13 +144,14 @@
 constructor (e.g. <code>tf$nn$top_k</code>)</p></td>
     </tr>
     <tr>
-      <th>r_prefix</th>
-      <td><p>Prefix to add to generated R function name</p></td>
-    </tr>
-    <tr>
       <th>r_function</th>
       <td><p>Name of R function to generate (defaults to name of Python
 function if not specified)</p></td>
+    </tr>
+    <tr>
+      <th>file_name</th>
+      <td><p>The file name to write the generated wrapper function to. If
+<code>NULL</code>, the generated wrapper will only be printed out in the console.</p></td>
     </tr>
     </table>
 

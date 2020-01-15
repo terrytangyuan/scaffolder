@@ -109,15 +109,15 @@ custom_scaffold_py_function_wrapper <- function(
       docs <- reticulate::py_function_docs(python_function)
       docs <- process_docs_fn(docs)
 
-      write_line(paste0("#' @title ", docs$name, "\n#'"))
-      write_line(paste0("#' @description ", docs$description, "\n#'"))
-      write_line(paste0("#' @details ", gsub("\n", "\n#' ", docs$details, fixed = TRUE), "\n#'"))
+      write_line(sprintf("#' @title %s\n#'", docs$name))
+      write_line(sprintf("#' @description %s\n#'", docs$description, "\n#'"))
+      write_line(sprintf("#' @details %s\n#'", gsub("\n", "\n#' ", docs$details, fixed = TRUE)))
 
       # Write docstrings for each parameters
       for(i in 1:length(docs$parameters)) {
         param_name <- names(docs$parameters)[i]
         param_doc <- process_param_doc_fn(docs$parameters[[param_name]], docs)
-        write_line(paste0("#' @param ", " ", param_name, " ", param_doc))
+        write_line(sprintf("#' @param %s %s", param_name, param_doc))
       }
 
       # Write docstring for return value
@@ -143,7 +143,7 @@ custom_scaffold_py_function_wrapper <- function(
         if (!is.list(additional_roxygen_fields))
           stop("additional_roxygen_fields_list must be a list")
         invisible(lapply(names(additional_roxygen_fields), function(field_name) {
-          write_line(paste0("#' @", field_name, " ", additional_roxygen_fields[[field_name]]))
+          write_line(sprintf("#' @%s ", field_name, additional_roxygen_fields[[field_name]]))
         }))
       }
 

@@ -24,9 +24,10 @@ scaffold_py_function_wrapper <- function(python_function, r_prefix = NULL, r_fun
   con <- textConnection("scaffolded_wrapper", "w")
 
   # title/description
-  write(sprintf("#' %s\n#' ", docs$description), file = con)
+  write(sprintf("#' @title %s\n#' ", docs$title), file = con)
+  write(sprintf("#' @description %s\n#' ", docs$description), file = con)
   details <- gsub("\n", "\n#' ", docs$details, fixed = TRUE)
-  write(sprintf("#' %s\n#' ", details), file = con)
+  write(sprintf("#' @details %s\n#' ", details), file = con)
 
   # parameters
   for (param in names(docs$parameters)) {
@@ -173,9 +174,9 @@ custom_scaffold_py_function_wrapper <- function(
       docs <- reticulate::py_function_docs(python_function)
       docs <- process_docs_fn(docs)
 
-      write_line(paste0("#' @description ", docs$description))
-      write_line(paste0("#' @title ", docs$name))
-      write_line("#' ")
+      write_line(paste0("#' @title ", docs$name, "\n#'"))
+      write_line(paste0("#' @description ", docs$description, "\n#'"))
+      write_line(paste0("#' @details ", gsub("\n", "\n#' ", docs$details, fixed = TRUE), "\n#'"))
 
       # Write docstrings for each parameters
       for(i in 1:length(docs$parameters)) {
@@ -183,6 +184,24 @@ custom_scaffold_py_function_wrapper <- function(
         param_doc <- process_param_doc_fn(docs$parameters[[param_name]], docs)
         write_line(paste0("#' @param ", " ", param_name, " ", param_doc))
       }
+
+      # Write docstring for return value
+      if (isTRUE(nzchar(docs$returns))) {
+        write_line("#'")
+        write_line(sprintf("#' @return %s", gsub("^\n", "", docs$returns)))
+      }
+
+      # Write docs for all the sections
+      for (section in names(docs$sections)) {
+        section_text <- docs$sections[[section]]
+        section_text <- gsub("\n", "\n#' ", section_text, fixed = TRUE)
+        write_line("#'")
+        write_line(sprintf("#' @section %s:\n#' %s", section, section_text))
+      }
+
+      # Write export statement
+      write_line("#'")
+      write_line("#' @export")
 
       # Write additional roxygen fields
       if (!is.null(additional_roxygen_fields)) {

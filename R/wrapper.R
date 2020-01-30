@@ -14,6 +14,15 @@
 #'   that can be used without modification.
 #'
 #' @importFrom reticulate py_function_docs
+#' 
+#' @examples
+#' \dontrun{
+#' 
+#' library(scaffolder)
+#' library(tensorflow)
+#' 
+#' scaffold_py_function_wrapper("tf$nn$top_k")
+#' }
 #'
 #' @export
 scaffold_py_function_wrapper <- function(python_function, r_function = NULL, file_name = NULL) {
@@ -82,7 +91,7 @@ scaffold_py_function_wrapper <- function(python_function, r_function = NULL, fil
 #' # Note that since the default value of parameter `k` is `1L`. It is wrapped
 #' # by `as.integer()` to ensure it's casted to integer before sending it to `tf$nn$top_k`
 #' # for execution. We then print out the python function result.
-#' py_function_custom_scaffold(
+#' custom_scaffold_py_function_wrapper(
 #'   "tf$nn$top_k",
 #'   r_function = "top_k",
 #'   process_param_fn = process_int_param_fn,

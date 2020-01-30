@@ -223,7 +223,7 @@ function.</p></td>
 <span class='co'># Note that since the default value of parameter `k` is `1L`. It is wrapped</span>
 <span class='co'># by `as.integer()` to ensure it's casted to integer before sending it to `tf$nn$top_k`</span>
 <span class='co'># for execution. We then print out the python function result.</span>
-<span class='fu'>py_function_custom_scaffold</span>(
+<span class='fu'>custom_scaffold_py_function_wrapper</span>(
   <span class='st'>"tf$nn$top_k"</span>,
   <span class='kw'>r_function</span> <span class='kw'>=</span> <span class='st'>"top_k"</span>,
   <span class='kw'>process_param_fn</span> <span class='kw'>=</span> <span class='no'>process_int_param_fn</span>,

@@ -74,7 +74,7 @@ process_int_param_fn <- function(param, docs) {
 # Note that since the default value of parameter `k` is `1L`. It is wrapped
 # by `as.integer()` to ensure it's casted to integer before sending it to `tf$nn$top_k`
 # for execution. We then print out the python function result.
-py_function_custom_scaffold(
+custom_scaffold_py_function_wrapper(
   "tf$nn$top_k",
   r_function = "top_k",
   process_param_fn = process_int_param_fn,

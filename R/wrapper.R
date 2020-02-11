@@ -66,6 +66,8 @@ scaffold_py_function_wrapper <- function(python_function, r_function = NULL, fil
 #'   `NULL`, the generated wrapper will only be printed out in the console.
 #'
 #' @importFrom reticulate py_function_docs
+#' 
+#' @export
 #'
 #' @examples
 #' \dontrun{

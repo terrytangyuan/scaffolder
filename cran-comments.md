@@ -9,4 +9,4 @@
 
 ## Notes
 
-This is the first release with experimental functionalities of scaffolding Python functions. I forgot to export a function that is used in the examples in the last submission and this submission fixes it.
+This is the first release with experimental functionalities of scaffolding Python functions. This submission adds packages that are used in examples to `Suggests` in `DESCRIIPTION` file that are missing in a previous CRAN submission.

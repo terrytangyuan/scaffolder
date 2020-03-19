@@ -31,7 +31,7 @@ really intended as an starting point for an R wrapper rather than a wrapper
 that can be used without modification.
 }
 \examples{
-\dontrun{
+\donttest{
 
 library(scaffolder)
 library(tensorflow)

@@ -51,7 +51,7 @@ from execution of \code{python_function} is assigned to a variable called
 before writing the closing curly braces for the generated wrapper function.
 }
 \examples{
-\dontrun{
+\donttest{
 
 library(tensorflow)
 library(stringr)

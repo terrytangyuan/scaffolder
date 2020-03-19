@@ -200,7 +200,7 @@ function.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tensorflow</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>stringr</span>)
@@ -227,9 +227,35 @@ function.</p></td>
   <span class='st'>"tf$nn$top_k"</span>,
   <span class='kw'>r_function</span> <span class='kw'>=</span> <span class='st'>"top_k"</span>,
   <span class='kw'>process_param_fn</span> <span class='kw'>=</span> <span class='no'>process_int_param_fn</span>,
-  <span class='kw'>postprocess_fn</span> <span class='kw'>=</span> <span class='kw'>function</span>() { <span class='st'>"print(python_function_result)"</span> })
-
-}</div></pre>
+  <span class='kw'>postprocess_fn</span> <span class='kw'>=</span> <span class='kw'>function</span>() { <span class='st'>"print(python_function_result)"</span> })</div><div class='output co'>#&gt; #' @title top_k
+#&gt; #'
+#&gt; #' @description Finds values and indices of the `k` largest entries for the last dimension.
+#&gt; #'
+#&gt; #' @details If the input is a vector (rank=1), finds the `k` largest entries in the vector
+#&gt; #' and outputs their values and indices as vectors. Thus `values[j]` is the
+#&gt; #' `j`-th largest entry in `input`, and its index is `indices[j]`. For matrices (resp. higher rank input), computes the top `k` entries in each
+#&gt; #' row (resp. vector along the last dimension). Thus, values.shape = indices.shape = input.shape[:-1] + [k] If two elements are equal, the lower-index element appears first.
+#&gt; #'
+#&gt; #' @param input 1-D or higher `Tensor` with last dimension at least `k`.
+#&gt; #' @param k 0-D `int32` `Tensor`. Number of top elements to look for along the last dimension (along each row for matrices).
+#&gt; #' @param sorted If true the resulting `k` elements will be sorted by the values in descending order.
+#&gt; #' @param name Optional name for the operation.
+#&gt; #'
+#&gt; #' @return values: The `k` largest elements along each last dimensional slice. indices: The indices of `values` within the last dimension of `input`.
+#&gt; #'
+#&gt; #' @export
+#&gt; top_k &lt;- function(input, k = 1L, sorted = TRUE, name = NULL) {
+#&gt; 
+#&gt;   python_function_result &lt;- tf$nn$top_k(
+#&gt;     input = input,
+#&gt;     k = as.integer(k),
+#&gt;     sorted = sorted,
+#&gt;     name = name
+#&gt;   )
+#&gt;   print(python_function_result)
+#&gt; }</div><div class='input'>
+# }
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

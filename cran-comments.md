@@ -9,4 +9,4 @@
 
 ## Notes
 
-This is the first release with experimental functionalities of scaffolding Python functions. This submission adds packages that are used in examples to `Suggests` in `DESCRIIPTION` file that are missing in a previous CRAN submission.
+This is the first release with experimental functionalities of scaffolding Python functions. This submission replaces `\dontrun{}` by `\donttest{}` in the Rd-files in a previous CRAN submission.

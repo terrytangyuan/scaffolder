@@ -16,7 +16,7 @@
 #' @importFrom reticulate py_function_docs
 #' 
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' 
 #' library(scaffolder)
 #' library(tensorflow)
@@ -70,7 +70,7 @@ scaffold_py_function_wrapper <- function(python_function, r_function = NULL, fil
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'
 #' library(tensorflow)
 #' library(stringr)

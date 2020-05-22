@@ -26,7 +26,12 @@ The core functionalties of this package were originally developed by [J.J. Allai
 
 #### Installation
 
-Install the **scaffolder** package from GitHub as follows:
+Install the **scaffolder** package from CRAN as follows:
+```r
+install.packages("scaffolder")
+```
+
+Or you can install it from GitHub as follows:
 
 ```r
 install.packages("remotes")

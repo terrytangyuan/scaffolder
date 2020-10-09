@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -45,7 +49,6 @@ from py_function_docs() and append additional roxygen fields. The result
 from execution of python_function is assigned to a variable called
 python_function_result that can also be processed by postprocess_fn
 before writing the closing curly braces for the generated wrapper function." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -63,7 +66,7 @@ before writing the closing curly braces for the generated wrapper function." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -141,16 +144,16 @@ from execution of <code>python_function</code> is assigned to a variable called
 before writing the closing curly braces for the generated wrapper function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>custom_scaffold_py_function_wrapper</span>(
-  <span class='no'>python_function</span>,
-  <span class='kw'>r_function</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>additional_roxygen_fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>process_docs_fn</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>docs</span>) <span class='no'>docs</span>,
-  <span class='kw'>process_param_fn</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>param</span>, <span class='no'>docs</span>) <span class='no'>param</span>,
-  <span class='kw'>process_param_doc_fn</span> <span class='kw'>=</span> <span class='kw'>function</span>(<span class='no'>param_doc</span>, <span class='no'>docs</span>) <span class='no'>param_doc</span>,
-  <span class='kw'>postprocess_fn</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>file_name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>custom_scaffold_py_function_wrapper</span><span class='op'>(</span>
+  <span class='va'>python_function</span>,
+  r_function <span class='op'>=</span> <span class='cn'>NULL</span>,
+  additional_roxygen_fields <span class='op'>=</span> <span class='cn'>NULL</span>,
+  process_docs_fn <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>docs</span><span class='op'>)</span> <span class='va'>docs</span>,
+  process_param_fn <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>param</span>, <span class='va'>docs</span><span class='op'>)</span> <span class='va'>param</span>,
+  process_param_doc_fn <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>param_doc</span>, <span class='va'>docs</span><span class='op'>)</span> <span class='va'>param_doc</span>,
+  postprocess_fn <span class='op'>=</span> <span class='cn'>NULL</span>,
+  file_name <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,32 +205,33 @@ function.</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tensorflow</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>stringr</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/rstudio/tensorflow'>tensorflow</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://stringr.tidyverse.org'>stringr</a></span><span class='op'>)</span>
 
 <span class='co'># Example of a `process_param_fn` to cast parameters with default values</span>
 <span class='co'># that contains "L" to integers</span>
-<span class='no'>process_int_param_fn</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>param</span>, <span class='no'>docs</span>) {
+<span class='va'>process_int_param_fn</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>param</span>, <span class='va'>docs</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='co'># Extract the list of parameters that have integer values as default</span>
-  <span class='no'>int_params</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span>(
+  <span class='va'>int_params</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/grep.html'>gsub</a></span><span class='op'>(</span>
     <span class='st'>" = [-]?[0-9]+L"</span>,
     <span class='st'>""</span>,
-    <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_extract.html'>str_extract_all</a></span>(<span class='no'>docs</span>$<span class='no'>signature</span>, <span class='st'>"[A-z]+ = [-]?[0-9]+L"</span>)<span class='kw'>[[</span><span class='fl'>1</span>]])
+    <span class='fu'><a href='https://stringr.tidyverse.org/reference/str_extract.html'>str_extract_all</a></span><span class='op'>(</span><span class='va'>docs</span><span class='op'>$</span><span class='va'>signature</span>, <span class='st'>"[A-z]+ = [-]?[0-9]+L"</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span><span class='op'>)</span>
   <span class='co'># Explicitly cast parameter in the list obtained above to integer</span>
-  <span class='kw'>if</span> (<span class='no'>param</span> <span class='kw'>%in%</span> <span class='no'>int_params</span>) {
-    <span class='no'>param</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"as.integer("</span>, <span class='no'>param</span>, <span class='st'>")"</span>)
-  }
-  <span class='no'>param</span>
-}
+  <span class='kw'>if</span> <span class='op'>(</span><span class='va'>param</span> <span class='op'>%in%</span> <span class='va'>int_params</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='va'>param</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"as.integer("</span>, <span class='va'>param</span>, <span class='st'>")"</span><span class='op'>)</span>
+  <span class='op'>}</span>
+  <span class='va'>param</span>
+<span class='op'>}</span>
 
 <span class='co'># Note that since the default value of parameter `k` is `1L`. It is wrapped</span>
 <span class='co'># by `as.integer()` to ensure it's casted to integer before sending it to `tf$nn$top_k`</span>
 <span class='co'># for execution. We then print out the python function result.</span>
-<span class='fu'>custom_scaffold_py_function_wrapper</span>(
+<span class='fu'>custom_scaffold_py_function_wrapper</span><span class='op'>(</span>
   <span class='st'>"tf$nn$top_k"</span>,
-  <span class='kw'>r_function</span> <span class='kw'>=</span> <span class='st'>"top_k"</span>,
-  <span class='kw'>process_param_fn</span> <span class='kw'>=</span> <span class='no'>process_int_param_fn</span>,
-  <span class='kw'>postprocess_fn</span> <span class='kw'>=</span> <span class='kw'>function</span>() { <span class='st'>"print(python_function_result)"</span> })</div><div class='output co'>#&gt; #' @title top_k
+  r_function <span class='op'>=</span> <span class='st'>"top_k"</span>,
+  process_param_fn <span class='op'>=</span> <span class='va'>process_int_param_fn</span>,
+  postprocess_fn <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>{</span> <span class='st'>"print(python_function_result)"</span> <span class='op'>}</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; #' @title top_k
 #&gt; #'
 #&gt; #' @description Finds values and indices of the `k` largest entries for the last dimension.
 #&gt; #'
@@ -254,16 +258,13 @@ function.</p></td>
 #&gt;   )
 #&gt;   print(python_function_result)
 #&gt; }</div><div class='input'>
-# }
+<span class='co'># }</span>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -274,7 +275,7 @@ function.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

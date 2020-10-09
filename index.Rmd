@@ -29,7 +29,7 @@ The **scaffolder** package comes to the rescue. It provides functions to automat
 
 ### History
 
-The core functionalties of this package were originally developed by [J.J. Allaire](https://github.com/jjallaire) and [Yuan Tang](https://github.com/terrytangyuan) as part of **reticulate**'s [scaffolding functionalities](https://github.com/rstudio/reticulate/blob/a046bd12eecc7c879ff14637367d661c707b5d8d/R/wrapper.R) to facilitate the process of writing different components of [the R interface to TensorFlow](https://tensorflow.rstudio.com/). We found the process of writing R wrappers very tedious and then developed the scaffolding functionalities in **reticulate** that are marked for internal use only. It was then further developed and experimented to automate the generation of [h2oai/h2o4gpu's R package](https://github.com/h2oai/h2o4gpu/tree/2af2bc75cef4ad93a28b80c1359c2cefe758a643/src/interface_r/).
+The core functionalties of this package were originally developed as part of **reticulate**'s [scaffolding functionalities](https://github.com/rstudio/reticulate/blob/a046bd12eecc7c879ff14637367d661c707b5d8d/R/wrapper.R) to facilitate the process of writing different components of [the R interface to TensorFlow](https://tensorflow.rstudio.com/). We found the process of writing R wrappers very tedious and then developed the scaffolding functionalities in **reticulate** that are marked for internal use only. It was then further developed and experimented to automate the generation of [h2oai/h2o4gpu's R package](https://github.com/h2oai/h2o4gpu/tree/2af2bc75cef4ad93a28b80c1359c2cefe758a643/src/interface_r/).
 
 ### Getting started
 

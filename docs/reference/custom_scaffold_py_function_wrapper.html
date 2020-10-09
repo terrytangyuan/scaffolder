@@ -44,8 +44,8 @@
 <meta property="og:title" content="Custom Scaffolding of R Wrappers for Python Functions — custom_scaffold_py_function_wrapper" />
 <meta property="og:description" content="This function can be used to generate R wrapper for a specified
 Python function while allowing to inject custom code for critical parts of
-the wrapper generation, such as process the any part of the docs obtained
-from py_function_docs() and append additional roxygen fields. The result
+the wrapper generation, such as process the any part of the obtained docs
+and append additional roxygen fields. The result
 from execution of python_function is assigned to a variable called
 python_function_result that can also be processed by postprocess_fn
 before writing the closing curly braces for the generated wrapper function." />
@@ -137,8 +137,8 @@ before writing the closing curly braces for the generated wrapper function." />
     <div class="ref-description">
     <p>This function can be used to generate R wrapper for a specified
 Python function while allowing to inject custom code for critical parts of
-the wrapper generation, such as process the any part of the docs obtained
-from <code>py_function_docs()</code> and append additional roxygen fields. The result
+the wrapper generation, such as process the any part of the obtained docs
+and append additional roxygen fields. The result
 from execution of <code>python_function</code> is assigned to a variable called
 <code>python_function_result</code> that can also be processed by <code>postprocess_fn</code>
 before writing the closing curly braces for the generated wrapper function.</p>
@@ -175,8 +175,7 @@ to the roxygen docs, e.g. <code><a href='https://rdrr.io/r/base/list.html'>list(
     </tr>
     <tr>
       <th>process_docs_fn</th>
-      <td><p>A function to process docs obtained from
-<code><a href='https://rdrr.io/pkg/reticulate/man/py_function_wrapper.html'>reticulate::py_function_docs(python_function)</a></code>.</p></td>
+      <td><p>A function to process the obtained docs.</p></td>
     </tr>
     <tr>
       <th>process_param_fn</th>

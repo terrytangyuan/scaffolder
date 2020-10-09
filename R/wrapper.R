@@ -12,8 +12,6 @@
 #'   values to Python integers via `as.integer` where required, etc.) so is
 #'   really intended as an starting point for an R wrapper rather than a wrapper
 #'   that can be used without modification.
-#'
-#' @importFrom reticulate py_function_docs
 #' 
 #' @examples
 #' \donttest{
@@ -43,8 +41,8 @@ scaffold_py_function_wrapper <- function(python_function, r_function = NULL, fil
 #'
 #' This function can be used to generate R wrapper for a specified
 #' Python function while allowing to inject custom code for critical parts of
-#' the wrapper generation, such as process the any part of the docs obtained
-#' from [py_function_docs()] and append additional roxygen fields. The result
+#' the wrapper generation, such as process the any part of the obtained docs
+#' and append additional roxygen fields. The result
 #' from execution of `python_function` is assigned to a variable called
 #' `python_function_result` that can also be processed by `postprocess_fn`
 #' before writing the closing curly braces for the generated wrapper function.
@@ -53,8 +51,7 @@ scaffold_py_function_wrapper <- function(python_function, r_function = NULL, fil
 #' @param additional_roxygen_fields A list of additional roxygen fields to write
 #'   to the roxygen docs, e.g. `list(export = "", rdname =
 #'   "generated-wrappers")`.
-#' @param process_docs_fn A function to process docs obtained from
-#'   `reticulate::py_function_docs(python_function)`.
+#' @param process_docs_fn A function to process the obtained docs.
 #' @param process_param_fn A function to process each parameter needed for
 #'   `python_funcion` before executing `python_funcion.`
 #' @param process_param_doc_fn A function to process the roxygen docstring for
@@ -65,8 +62,6 @@ scaffold_py_function_wrapper <- function(python_function, r_function = NULL, fil
 #' @param file_name The file name to write the generated wrapper function to. If
 #'   `NULL`, the generated wrapper will only be printed out in the console.
 #'
-#' @importFrom reticulate py_function_docs
-#' 
 #' @export
 #'
 #' @examples
@@ -117,7 +112,7 @@ custom_scaffold_py_function_wrapper <- function(
 
   wrapper_output <- capture.output(
     {
-      docs <- reticulate::py_function_docs(python_function)
+      docs <- py_function_docs(python_function)
       docs <- process_docs_fn(docs)
 
       write_line(sprintf("#' @title %s\n#'", docs$name))

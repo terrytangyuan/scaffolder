@@ -1,9 +1,8 @@
+**Note**: This package has been maintained by [@terrytangyuan](https://github.com/terrytangyuan) since 2019. Please [consider sponsoring](https://github.com/sponsors/terrytangyuan)!
 # scaffolder
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/scaffolder)](https://cran.r-project.org/package=scaffolder)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Travis-CI Build
-Status](https://travis-ci.org/terrytangyuan/scaffolder.svg?branch=master)](https://travis-ci.org/terrytangyuan/scaffolder)
 
 The **scaffolder** package provides a comprehensive set of tools to automate the process of scaffolding interfaces to modules, classes, functions, and documentations written in other programming languages. As initial proof of concept, scaffolding R interfaces to Python packages is supported via [reticulate](https://github.com/rstudio/reticulate).
 
